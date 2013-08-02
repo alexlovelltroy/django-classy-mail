@@ -17,7 +17,7 @@ class EmailTemplate(models.Model):
 
 
 class CampaignAddressee(models.Model):
-    user = models.ForeignKey(User, blank=True, null=True, required=False)
+    user = models.ForeignKey(User, blank=True, null=True)
     email_address = models.EmailField(unique=True)
     first_name = models.CharField(max_length=128, null=True, blank=True)
     last_name = models.CharField(max_length=128, null=True, blank=True)

@@ -115,7 +115,7 @@ class BaseTemplateMixin(object):
             try:
                 subject = self.subject.lstrip().rstrip().replace('\n','')
             except AttributeError:
-                subject = self.render_subject_template(),
+                subject = self.render_subject_template()
             self._msg = EmailMultiAlternatives(
                 subject = subject,
                 body = self.render_text_template(),
