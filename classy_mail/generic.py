@@ -148,7 +148,7 @@ class FileTemplateMixin(BaseTemplateMixin):
 class ModelTemplateMixin(BaseTemplateMixin):
     _template = None
 
-    def _get_template(self, template_name):
+    def _get_template(self):
         if self._template is None:
             self._template = EmailTemplate.objects.get(name=self.get_template_name())
         return self._template
