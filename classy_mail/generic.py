@@ -160,7 +160,10 @@ class ModelTemplateMixin(BaseTemplateMixin):
         return Template(self._get_template().text_content)
 
     def get_html_template(self):
-        return Template(self._get_template().html_content)
+        template_content = self._get_template().html_content
+        if template_content != '':
+            return Template(template_content)
+        return None
 
 
 class SiteContextMixin(object):
