@@ -39,3 +39,6 @@ class CampaignMail(models.Model):
     date_sent = models.DateTimeField(null=True, blank=True)
     date_opened = models.DateTimeField(null=True, blank=True)
     date_clicked = models.DateTimeField(null=True, blank=True)
+
+# TODO: Add the tracking pixel and a link interceptor
+
