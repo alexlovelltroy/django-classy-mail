@@ -1,7 +1,7 @@
 import logging
 logger = logging.getLogger("classy_mail")
 from django.conf import settings
-from django.template import Template, Context ,loader
+from django.template import Template, Context ,loader, TemplateDoesNotExist
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
 from .models import EmailTemplate
@@ -21,7 +21,10 @@ def _resolve_template(template):
     if isinstance(template, (list, tuple)):
         return loader.select_template(template)
     elif isinstance(template, basestring):
-        return loader.get_template(template)
+        try:
+            return loader.get_template(template)
+        except TemplateDoesNotExist:
+            return None
     else:
         return template
 
@@ -31,6 +34,7 @@ def _resolve_template(template):
 class BaseEmail(object):
     _msg = None
     from_email = settings.DEFAULT_FROM_EMAIL
+    context = dict()
     #TODO: Separate getting the template from rendering it
 
     def __init__(self, **kwargs):
@@ -83,8 +87,8 @@ class BaseEmail(object):
 
 
     def send(self):
-        msg = self.build_msg()
-        msg.send()
+        self.msg = self.build_msg()
+        self.msg.send()
 
 
 class BaseTemplateMixin(object):
