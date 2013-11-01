@@ -4,7 +4,7 @@ from django.conf import settings
 from django.template import Template, Context ,loader, TemplateDoesNotExist
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
-from .models import EmailTemplate
+from .models import EmailTemplate, EmailMessageLog
 from .exceptions import *
 
 # Utility Functions
@@ -176,6 +176,26 @@ class SiteContextMixin(object):
         context.update(dict(site = Site.objects.get_current()))
         return context
 
+class LogMessageMixin(object):
+    def send(self, log_msg=True):
+        self.msg = self.build_msg()
+        # Does this need to be a manager method?
+        if log_msg:
+            log = EmailMessageLog(
+                message_text = self.msg.as_string(),
+                subject = self.msg.get('Subject'),
+                from_header = self.msg.get('From'),
+                to_header = self.msg.get('To'),
+                cc_header = self.msg.get('Cc'),
+                bcc_header = self.msg.get('Bcc'),
+            )
+            self.msg.send()
+            log.save()
+        else:
+            self.msg.send()
+
+
+
 
 class SimpleEmail(BaseEmail):
     """This email needs everything passed in to init"""
@@ -196,10 +216,10 @@ class SimpleEmail(BaseEmail):
         return self._msg
 
 
-class ModelTemplateEmail(ModelTemplateMixin, BaseEmail):
+class ModelTemplateEmail(LogMessageMixin, ModelTemplateMixin, BaseEmail):
     pass
 
 
-class FileTemplateEmail(FileTemplateMixin, BaseEmail):
+class FileTemplateEmail(LogMessageMixin, FileTemplateMixin, BaseEmail):
     pass
 

@@ -42,3 +42,12 @@ class CampaignMail(models.Model):
 
 # TODO: Add the tracking pixel and a link interceptor
 
+class EmailMessageLog(models.Model):
+    message_text = models.TextField(blank=True, null=True)
+    subject = models.CharField(max_length=512, blank=True, null=True)
+    from_header = models.CharField(max_length=512, blank=True, null=True)
+    to_header = models.CharField(max_length=512, blank=True, null=True)
+    cc_header = models.CharField(max_length=512, blank=True, null=True)
+    bcc_header = models.CharField(max_length=512, blank=True, null=True)
+    date_header = models.CharField(max_length=512, blank=True, null=True)
+    sent = models.DateTimeField(auto_now_add=True)
