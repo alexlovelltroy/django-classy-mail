@@ -182,12 +182,12 @@ class LogMessageMixin(object):
         # Does this need to be a manager method?
         if log_msg:
             log = EmailMessageLog(
-                message_text = self.msg.as_string(),
-                subject = self.msg.get('Subject'),
-                from_header = self.msg.get('From'),
-                to_header = self.msg.get('To'),
-                cc_header = self.msg.get('Cc'),
-                bcc_header = self.msg.get('Bcc'),
+                message_text = self.msg.message().as_string(),
+                subject = self.msg.message().get('Subject'),
+                from_header = self.msg.message().get('From'),
+                to_header = self.msg.message().get('To'),
+                cc_header = self.msg.message().get('Cc'),
+                bcc_header = self.msg.message().get('Bcc'),
             )
             self.msg.send()
             log.save()
