@@ -8,7 +8,7 @@ class TemplatedEmailMessageAdmin(admin.ModelAdmin):
 
 class MessageLogAdmin(admin.ModelAdmin):
     list_display = ('to_header', 'subject', 'sent')
-    ordering = ('sent',)
+    ordering = ('-sent',)
 
 admin.site.register(EmailTemplate, TemplatedEmailMessageAdmin)
 admin.site.register(EmailMessageLog, MessageLogAdmin)
