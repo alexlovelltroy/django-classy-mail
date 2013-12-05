@@ -90,7 +90,6 @@ class BaseEmail(object):
         self.msg = self.build_msg()
         self.msg.send()
 
-
 class BaseTemplateMixin(object):
     _context_obj = None
 
@@ -133,7 +132,6 @@ class BaseTemplateMixin(object):
                 self._msg.attach_alternative(self.render_html_template(), 'text/html')
         return self._msg
 
-
 class FileTemplateMixin(BaseTemplateMixin):
 
     def get_subject_template(self):
@@ -147,7 +145,6 @@ class FileTemplateMixin(BaseTemplateMixin):
     def get_html_template(self):
         template_name = "%s_body.html" % self.get_template_name()
         return _resolve_template(template_name)
-
 
 class ModelTemplateMixin(BaseTemplateMixin):
     _template = None
@@ -168,7 +165,6 @@ class ModelTemplateMixin(BaseTemplateMixin):
         if template_content != '':
             return Template(template_content)
         return None
-
 
 class SiteContextMixin(object):
     def get_context(self):
@@ -194,9 +190,6 @@ class LogMessageMixin(object):
         else:
             self.msg.send()
 
-
-
-
 class SimpleEmail(BaseEmail):
     """This email needs everything passed in to init"""
 
@@ -214,7 +207,6 @@ class SimpleEmail(BaseEmail):
             if self.get_html_content() is not None:
                 self._msg.attach_alternative(self.get_html_content(), 'text/html')
         return self._msg
-
 
 class ModelTemplateEmail(LogMessageMixin, ModelTemplateMixin, BaseEmail):
     pass
