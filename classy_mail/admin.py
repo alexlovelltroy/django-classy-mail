@@ -7,6 +7,7 @@ class TemplatedEmailMessageAdmin(admin.ModelAdmin):
     ordering = ('name',)
 
 class MessageLogAdmin(admin.ModelAdmin):
+    search_fields = ['to_header', 'subject']
     list_display = ('to_header', 'subject', 'sent')
     ordering = ('-sent',)
 
