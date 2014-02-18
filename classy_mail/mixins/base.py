@@ -1,5 +1,6 @@
 from django.core.mail import EmailMultiAlternatives
-from django.template.base import Context, loader, TemplateDoesNotExist
+from django.template.base import Context, TemplateDoesNotExist
+from django.template import loader
 
 
 def resolve_template(template):
