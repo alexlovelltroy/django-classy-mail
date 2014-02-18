@@ -4,7 +4,7 @@ from django.template.base import (
     TemplateEncodingError,
 )
 from django.template.loader import make_origin
-from django.template.loaders.filesystem import Loader as FilesystemLoader
+from django.template.loaders.app_directories import Loader as AppDirectoriesLoader
 from markdown import markdown
 import yaml
 #from BeautifulSoup import BeautifulSoup
@@ -20,7 +20,7 @@ class MarkdownTemplate(Template):
                 self.frontmatter = context
         try:
             template_string = markdown(template_string)
-            super(Template, self).__init__(
+            super(MarkdownTemplate, self).__init__(
                 template_string,
                 origin=origin,
                 name=name
@@ -30,7 +30,7 @@ class MarkdownTemplate(Template):
                                         "from unicode or UTF-8 strings.")
 
 
-class MarkdownTemplateLoader(FilesystemLoader):
+class MarkdownTemplateLoader(AppDirectoriesLoader):
 
     def load_template(self, template_name, template_dirs=None):
         source, display_name = self.load_template_source(template_name,
