@@ -1,14 +1,14 @@
 from django.template.base import (
+    Context,
     Template,
-    TemplateDoesNotExist,
-    TemplateEncodingError,
+    TemplateDoesNotExist
 )
 from django.template.loader import make_origin
 from django.template.loaders.app_directories import Loader as AppDirectoriesLoader
 from markdown import markdown
 import yaml
 from BeautifulSoup import BeautifulSoup
-from .base import BaseTemplateMixin, resolve_template
+from .base import BaseTemplateMixin
 
 
 class MarkdownTemplate(Template):
@@ -61,13 +61,13 @@ class MarkdownTemplateMixin(BaseTemplateMixin):
     def get_md_template(self):
         if self.markdown_template is None:
             loader = MarkdownTemplateLoader()
-            self.template, origin = loader.load_template(
+            self.markdown_template, origin = loader.load_template(
                 "%s.md" % self.get_template_name()
             )
         return self.markdown_template
 
     def get_subject_template(self):
-        return Template(self.get_md_template().frontmatter['Subject'])
+        return Template(self.get_md_template().frontmatter['subject'])
 
     def get_text_template(self):
         return Template(self.get_md_template().text_template)
