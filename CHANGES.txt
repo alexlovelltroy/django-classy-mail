@@ -1,1 +1,2 @@
 v0.1.0, Feb 17th 2014 -- Initial release.
+v0.1.1, Feb 20th 2014 -- Bugfixes for subject parsing.
