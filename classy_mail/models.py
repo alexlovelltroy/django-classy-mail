@@ -3,8 +3,6 @@ logger = logging.getLogger("classy_mail")
 from django.contrib.auth import get_user_model
 from django.db import models
 
-User = get_user_model()
-
 class EmailTemplate(models.Model):
     name = models.CharField(max_length=64, unique=True)
     description = models.CharField(max_length=512)
@@ -17,7 +15,7 @@ class EmailTemplate(models.Model):
 
 
 class CampaignAddressee(models.Model):
-    user = models.ForeignKey(User, blank=True, null=True)
+    user = models.ForeignKey(get_user_model(), blank=True, null=True)
     email_address = models.EmailField(unique=True)
     first_name = models.CharField(max_length=128, null=True, blank=True)
     last_name = models.CharField(max_length=128, null=True, blank=True)
