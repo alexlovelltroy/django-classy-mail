@@ -8,8 +8,11 @@ that django provides.  This means that you can still use any backend you want.
 I like [django-ses](https://github.com/hmarr/django-ses), but you may like
 something else.
 
+Get it from [pipi](https://pypi.python.org/pypi/django-classy-mail/)
+
 The simplest usage of the class is to send a one-off e-mail like this:
 
+    ```python 
     from classy_mail.generic import SimpleEmail
 
     #create the email
@@ -18,6 +21,7 @@ The simplest usage of the class is to send a one-off e-mail like this:
     email.send()
     #You can check things like send status on the object
     print email.status
+    ````
 
 
 Some other mixins to play with:
