@@ -1,3 +1,4 @@
 v0.1.0, Feb 17th 2014 -- Initial release.
 v0.1.1, Feb 20th 2014 -- Bugfixes for subject parsing.
 v0.1.2, Feb 24th 2014 -- Added a mixin for a unique message.
+v0.1.6, Dec 22nd 2014 -- Removed dependency on South and migrations

@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='django-classy-mail',
-    version='0.1.4',
+    version='0.1.6',
     author='Alex Lovell-Troy',
     author_email='alex@lovelltroy.org',
     description='Class-Based Email for Django built with Mixins',
@@ -14,7 +14,6 @@ setup(
         "Django >= 1.5",
         "markdown >= 2.4",
         "BeautifulSoup >= 3.2",
-        "South >= 0.8",
         "PyYAML >= 3.10",
     ],
 )
